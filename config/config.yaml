@@ -1,5 +1,5 @@
 Model_Trainer:
   name: 'yolo11n.pt'
-  epoch: 5
+  epoch: 10
   checkpoint_dir: 'artifacts/models'
   data_root: 'Data'

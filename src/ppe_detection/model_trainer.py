@@ -1,5 +1,4 @@
 import torch
-from pathlib import Path
 from ultralytics import YOLO
 from src.logger import logging
 from src.exception import CustomException
@@ -18,22 +17,27 @@ class ModelTrainer():
         try:
             logging.info('Training Started')
 
-            results = self.model(
-                source = self.data_yaml,
+            results = self.model.train(
+                data = str(self.data_yaml),
                 epochs = self.epochs,
                 imgsz = 640,
-                device = self.device,
                 batch = 32,
-                project = self.save_path,
+                device = self.device,
+                project = str(self.save_path),
                 name = 'training'
             )
             metrics = results.box
 
+
             logging.info(
                 "Training completed | "
-                f"mAP50: {metrics.map50:.4f} | "
-                f"mAP50-9: {metrics.map:.4f}"
+                f"mAP50: {metrics.get('metrics/mAP50(B)', 0):.4f} | "
+                f"mAP50-95: {metrics.get('metrics/mAP50-95(B)', 0):.4f} | "
+                f"Precision: {metrics.get('metrics/precision(B)', 0):.4f} | "
+                f"Recall: {metrics.get('metrics/recall(B)', 0):.4f}"
             )
+
+            return results
             
         except CustomException as e:
             logging.exception('Error occured while training')
