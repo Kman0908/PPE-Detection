@@ -12,14 +12,14 @@ with open(path, 'r') as f:
         _yaml = safe_load(f)
     except Exception as e:
         raise CustomException(e)
+config = _yaml['Model_trainer']
 
 mt_conf = ModelTrainerConfig(
-    checkpoint_dir = _yaml['checkpoint_dir'],
-    data_root = _yaml['data_root'],
-    epochs = _yaml['epochs'],
-    name = _yaml['name']
+    data_root = config['data_root'],
+    epochs = config['epoch'],
+    name = config['name']
 )
 
-if name == '__main__':
+if __name__ == '__main__':
     model_trainer_object = ModelTrainer(config = mt_conf)
     results = model_trainer_object.train()
