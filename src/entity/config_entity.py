@@ -8,3 +8,9 @@ class ModelTrainerConfig:
     epochs: int
     name: str
 
+@dataclass
+class ModelEvaluatorConfig:
+    model_path: Path
+    data_root: Path
+    imgsz: int = 768
+    split: str = 'test'

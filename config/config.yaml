@@ -2,3 +2,9 @@ Model_Trainer:
   name: 'yolo11n.pt'
   epoch: 10
   data_root: 'Data'
+
+Model_Evaluator:
+  model_path: 'runs/detect/training/weights/best.pt'
+  data_root: 'Data'
+  imgsz: 768
+  split: 'test'
