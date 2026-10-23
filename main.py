@@ -7,7 +7,7 @@ from src.ppe_detection.model_trainer import ModelTrainer
 from src.ppe_detection.model_evaluator import ModelEvaluator
 from src.entity.config_entity import ModelEvaluatorConfig
 
-path = os.path.join(os.getcwd(), 'Data/data.yaml')
+path = os.path.join(os.getcwd(), 'config/config.yaml')
 
 with open(path, 'r') as f:
     try:
